@@ -30,7 +30,7 @@ class HomeViewController: UIViewController {
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
+        tableView.register(CarsTableViewCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.tableFooterView = UIView()
         
     }
@@ -60,13 +60,11 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)
-        cell = UITableViewCell(style: .subtitle, reuseIdentifier: reuseIdentifier)
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! CarsTableViewCell
         let car = cars[indexPath.row]
-        cell?.detailTextLabel?.numberOfLines = 0
-        cell?.textLabel?.text = car.title
-        cell?.detailTextLabel?.text = car.description
-        return cell!
+        cell.textLabel?.text = car.title
+        cell.detailTextLabel?.text = car.description
+        return cell
     }
 }
 
